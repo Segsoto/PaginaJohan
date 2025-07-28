@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - AutoParts Pro | Nuestros Productos y Servicios</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Galería de productos AutoParts Pro. Conoce nuestra amplia gama de piezas para carros chinos y europeos, instalaciones y servicios realizados.">
+    <meta name="keywords" content="galería autopartes, productos automotrices, piezas carros, repuestos instalados, trabajos realizados">
+    
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="index.html">
+                        <h2>AutoParts Pro</h2>
+                    </a>
+                </div>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="nosotros.html" class="nav-link">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="servicios.html" class="nav-link">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="galeria.html" class="nav-link active">Galería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="contacto.html" class="nav-link">Contacto</a>
+                    </li>
+                </ul>
+                
+                <div class="nav-toggle" id="mobile-menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header gallery-header">
+        <div class="container">
+            <h1>Galería</h1>
+            <p>Conoce nuestros productos y trabajos realizados</p>
+        </div>
+        <div class="page-header-overlay"></div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="productos">Productos</button>
+                <button class="filter-btn" data-filter="instalaciones">Instalaciones</button>
+                <button class="filter-btn" data-filter="taller">Taller</button>
+                <button class="filter-btn" data-filter="chinos">Carros Chinos</button>
+                <button class="filter-btn" data-filter="europeos">Carros Europeos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid" id="gallery-grid">
+                
+                <!-- Productos -->
+                <div class="gallery-item" data-category="productos chinos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Frenos para BYD" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Kit de Frenos BYD</h3>
+                                <p>Sistema completo de frenos para modelos BYD</p>
+                                <button class="gallery-btn" onclick="openModal(0)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos europeos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Motor BMW" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Repuestos BMW</h3>
+                                <p>Piezas originales para motores BMW</p>
+                                <button class="gallery-btn" onclick="openModal(1)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones europeos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Instalación Mercedes" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Instalación Mercedes-Benz</h3>
+                                <p>Cambio de sistema de suspensión completo</p>
+                                <button class="gallery-btn" onclick="openModal(2)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos chinos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Transmisión Chery" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Transmisión Chery</h3>
+                                <p>Caja de cambios automática para Chery Tiggo</p>
+                                <button class="gallery-btn" onclick="openModal(3)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="taller">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Nuestro Taller" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Nuestro Taller</h3>
+                                <p>Instalaciones modernas y equipadas</p>
+                                <button class="gallery-btn" onclick="openModal(4)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos europeos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Filtros Volkswagen" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Filtros Volkswagen</h3>
+                                <p>Kit completo de filtros para mantenimiento</p>
+                                <button class="gallery-btn" onclick="openModal(5)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones chinos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Diagnóstico JAC" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Diagnóstico JAC</h3>
+                                <p>Servicio de diagnóstico computarizado</p>
+                                <button class="gallery-btn" onclick="openModal(6)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos europeos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Amortiguadores Audi" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Amortiguadores Audi</h3>
+                                <p>Sistema de suspensión deportiva para Audi</p>
+                                <button class="gallery-btn" onclick="openModal(7)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos chinos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Luces Great Wall" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Sistema de Iluminación</h3>
+                                <p>Luces LED para Great Wall</p>
+                                <button class="gallery-btn" onclick="openModal(8)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="taller instalaciones">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1609521263047-f8f205293f24?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Equipo de Diagnóstico" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Equipo de Diagnóstico</h3>
+                                <p>Tecnología avanzada para diagnósticos precisos</p>
+                                <button class="gallery-btn" onclick="openModal(9)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="productos europeos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Clutch Peugeot" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Kit de Clutch Peugeot</h3>
+                                <p>Sistema completo de embrague para Peugeot</p>
+                                <button class="gallery-btn" onclick="openModal(10)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="instalaciones chinos">
+                    <div class="gallery-image">
+                        <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Instalación Geely" loading="lazy">
+                        <div class="gallery-overlay">
+                            <div class="gallery-info">
+                                <h3>Instalación Geely</h3>
+                                <p>Cambio completo de sistema eléctrico</p>
+                                <button class="gallery-btn" onclick="openModal(11)">
+                                    <i class="fas fa-expand"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Gallery -->
+    <div class="modal-gallery" id="modal-gallery">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div class="modal-navigation">
+                <button class="modal-nav prev" onclick="prevImage()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="modal-nav next" onclick="nextImage()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="modal-image">
+                <img id="modal-img" src="" alt="">
+            </div>
+            <div class="modal-info">
+                <h3 id="modal-title"></h3>
+                <p id="modal-description"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <section class="gallery-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3>1000+</h3>
+                    <p>Productos en Stock</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>500+</h3>
+                    <p>Instalaciones Realizadas</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h3>50+</h3>
+                    <p>Marcas Disponibles</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <h3>98%</h3>
+                    <p>Clientes Satisfechos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>¿Te Interesa Algún Producto?</h2>
+                <p>Contáctanos para obtener más información sobre precios y disponibilidad</p>
+                <a href="contacto.html" class="btn btn-primary">Solicitar Información</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>AutoParts Pro</h3>
+                    <p>Tu socio confiable en repuestos automotrices de calidad.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="galeria.html">Galería</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Principal 123, San José</p>
+                        <p><i class="fas fa-phone"></i> +506 2222-3333</p>
+                        <p><i class="fas fa-envelope"></i> johan@autopartspro.com</p>
+                        <p><i class="fas fa-user"></i> Johan Cruz - Propietario</p>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Horarios</h4>
+                    <div class="schedule">
+                        <p>Lunes - Viernes: 8:00 AM - 6:00 PM</p>
+                        <p>Sábados: 8:00 AM - 4:00 PM</p>
+                        <p>Domingos: Cerrado</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AutoParts Pro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/50622223333?text=Hola,%20vi%20un%20producto%20en%20su%20galería%20y%20me%20interesa" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
