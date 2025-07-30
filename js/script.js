@@ -50,33 +50,33 @@ const productosEuropeos = [
         imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
-        nombre: "Filtros Mercedes-Benz",
-        descripcion: "Kit de filtros completo para Mercedes-Benz Clase C y E",
-        precio: "₡35,000",
+        nombre: "Filtros Toyota",
+        descripcion: "Kit de filtros completo para Toyota Corolla y Camry",
+        precio: "₡25,000",
         imagen: "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
-        nombre: "Suspensión Audi",
-        descripcion: "Sistema de suspensión deportiva para Audi A4 y A6",
-        precio: "₡185,000",
+        nombre: "Amortiguadores Honda",
+        descripcion: "Sistema de suspensión para Honda Civic y Accord",
+        precio: "₡95,000",
         imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
-        nombre: "Motor de Arranque VW",
-        descripcion: "Motor de arranque para Volkswagen Golf y Passat",
-        precio: "₡85,000",
+        nombre: "Motor de Arranque Nissan",
+        descripcion: "Motor de arranque para Nissan Sentra y Altima",
+        precio: "₡75,000",
         imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
-        nombre: "Radiador Peugeot",
-        descripcion: "Radiador de aluminio para Peugeot 206 y 208",
-        precio: "₡75,000",
+        nombre: "Radiador Hyundai",
+        descripcion: "Radiador de aluminio para Hyundai Elantra y Accent",
+        precio: "₡65,000",
         imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     },
     {
-        nombre: "Turbo Renault",
-        descripcion: "Turbocompresor para Renault Megane y Scenic",
-        precio: "₡225,000",
+        nombre: "Kit de Clutch Mazda",
+        descripcion: "Kit completo de clutch para Mazda 3 y CX-5",
+        precio: "₡115,000",
         imagen: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
     }
 ];
@@ -87,7 +87,9 @@ const marcasChinas = [
 ];
 
 const marcasEuropeas = [
-    "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Peugeot", "Renault", "Volvo", "SEAT", "Skoda", "Opel"
+    "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Toyota", "Honda", "Nissan", "Hyundai", 
+    "Mazda", "Kia", "Peugeot", "Renault", "Volvo", "SEAT", "Skoda", "Opel", "Ford", 
+    "Chevrolet", "Mitsubishi", "Subaru", "Suzuki", "Infiniti", "Lexus", "Acura"
 ];
 
 /* ===== IMÁGENES DE GALERÍA ===== */
@@ -228,7 +230,7 @@ function showProducts(tipo) {
     if (!productsSection || !productsGrid || !productsTitle) return;
     
     const productos = tipo === 'chino' ? productosChinos : productosEuropeos;
-    const titulo = tipo === 'chino' ? 'Productos para Carros Chinos' : 'Productos para Carros Europeos';
+    const titulo = tipo === 'chino' ? 'Productos para Carros Chinos' : 'Productos para Carros Particulares';
     
     productsTitle.textContent = titulo;
     productsGrid.innerHTML = '';
@@ -287,7 +289,7 @@ function initializeContactForm() {
         tipoCarroSelect.addEventListener('change', function() {
             const valor = this.value;
             
-            if (valor === 'chino' || valor === 'europeo') {
+            if (valor === 'chino' || valor === 'particular') {
                 marcaGroup.style.display = 'block';
                 populateMarcas(valor, marcaSelect);
             } else {
