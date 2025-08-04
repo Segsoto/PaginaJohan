@@ -108,11 +108,49 @@
         </div>
     </section>
 
+    <!-- Brand Selection Modal -->
+    <div class="modal-overlay" id="brand-modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="brand-modal-title">Selecciona una Marca</h2>
+                <button class="btn btn-close" onclick="hideBrandModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="brands-grid" id="brands-grid">
+                <!-- Brands will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Products Modal -->
+    <div class="modal-overlay" id="products-modal" style="display: none;">
+        <div class="modal-content modal-content-large">
+            <div class="modal-header">
+                <h2 id="products-modal-title">Productos Disponibles</h2>
+                <div class="modal-header-buttons">
+                    <button class="btn btn-back" onclick="goBackToBrands()" style="margin-right: 10px;">
+                        <i class="fas fa-arrow-left"></i> Cambiar Marca
+                    </button>
+                    <button class="btn btn-close" onclick="hideProductsModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="products-modal-grid" id="products-modal-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
     <!-- Products Display -->
     <section class="products-display" id="products-section" style="display: none;">
         <div class="container">
             <div class="products-header">
                 <h2 id="products-title">Productos Disponibles</h2>
+                <button class="btn btn-back" onclick="goBackToBrands()" style="margin-right: 10px;">
+                    <i class="fas fa-arrow-left"></i> Cambiar Marca
+                </button>
                 <button class="btn btn-close" onclick="hideProducts()">
                     <i class="fas fa-times"></i>
                 </button>

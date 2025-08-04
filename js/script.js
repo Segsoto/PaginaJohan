@@ -1,8 +1,270 @@
 /* ===== VARIABLES GLOBALES ===== */
 let currentModalImage = 0;
 const galleryImages = [];
+let currentCarType = '';
 
-/* ===== PRODUCTOS DE EJEMPLO ===== */
+/* ===== PRODUCTOS ORGANIZADOS POR MARCAS ===== */
+const productosPorMarca = {
+    // Marcas Chinas (solo las que tienen logos locales)
+    byd: [
+        {
+            nombre: "Kit de Frenos BYD Tang",
+            descripcion: "Sistema completo de frenos delanteros y traseros para BYD Tang",
+            precio: "₡85,000",
+            imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Batería BYD Song",
+            descripcion: "Batería de alta capacidad para modelos híbridos BYD Song",
+            precio: "₡320,000",
+            imagen: "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Amortiguadores BYD F3",
+            descripcion: "Par de amortiguadores traseros para BYD F3",
+            precio: "₡65,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    chery: [
+        {
+            nombre: "Filtro de Aire Chery Tiggo",
+            descripcion: "Filtro de aire de alta eficiencia para Chery Tiggo 2, 3 y 7",
+            precio: "₡12,500",
+            imagen: "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Transmisión Chery QQ",
+            descripcion: "Caja de cambios manual para Chery QQ",
+            precio: "₡180,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Kit de Clutch Chery Arrizo",
+            descripcion: "Kit completo de embrague para Chery Arrizo 5",
+            precio: "₡95,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    jac: [
+        {
+            nombre: "Amortiguadores JAC S3",
+            descripcion: "Juego de amortiguadores delanteros para JAC S3",
+            precio: "₡95,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Motor de Arranque JAC S5",
+            descripcion: "Motor de arranque reforzado para JAC S5",
+            precio: "₡75,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    "great wall": [
+        {
+            nombre: "Kit de Clutch Great Wall Hover",
+            descripcion: "Kit completo de clutch para Great Wall Hover H3 y H5",
+            precio: "₡125,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Sistema de Iluminación Wingle",
+            descripcion: "Kit de luces LED para Great Wall Wingle",
+            precio: "₡65,000",
+            imagen: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    geely: [
+        {
+            nombre: "Bomba de Agua Geely CK",
+            descripcion: "Bomba de agua original para Geely CK y MK",
+            precio: "₡35,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Radiador Geely Emgrand",
+            descripcion: "Radiador de aluminio para Geely Emgrand X7",
+            precio: "₡85,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    mg: [
+        {
+            nombre: "Sistema de Luces MG ZS",
+            descripcion: "Kit de luces LED completo para MG ZS",
+            precio: "₡65,000",
+            imagen: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Pastillas de Freno MG HS",
+            descripcion: "Pastillas de freno cerámicas para MG HS",
+            precio: "₡45,000",
+            imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    
+    // Marcas Particulares (Top 10 con más mercado)
+    toyota: [
+        {
+            nombre: "Kit de Filtros Toyota Corolla",
+            descripcion: "Kit de filtros completo para Toyota Corolla (aire, aceite, combustible)",
+            precio: "₡25,000",
+            imagen: "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Alternador Toyota Camry",
+            descripcion: "Alternador de alta eficiencia para Toyota Camry",
+            precio: "₡85,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Kit de Clutch Toyota Hilux",
+            descripcion: "Kit de embrague reforzado para Toyota Hilux",
+            precio: "₡135,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    honda: [
+        {
+            nombre: "Amortiguadores Honda Civic",
+            descripcion: "Sistema de suspensión para Honda Civic",
+            precio: "₡95,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Radiador Honda Accord",
+            descripcion: "Radiador de aluminio para Honda Accord",
+            precio: "₡75,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Kit de Frenos Honda CR-V",
+            descripcion: "Kit completo de frenos para Honda CR-V",
+            precio: "₡95,000",
+            imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    nissan: [
+        {
+            nombre: "Motor de Arranque Nissan Sentra",
+            descripcion: "Motor de arranque para Nissan Sentra y Versa",
+            precio: "₡75,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Bomba de Agua Nissan Altima",
+            descripcion: "Bomba de agua con termostato para Nissan Altima",
+            precio: "₡55,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    hyundai: [
+        {
+            nombre: "Radiador Hyundai Elantra",
+            descripcion: "Radiador de aluminio para Hyundai Elantra y Accent",
+            precio: "₡65,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Kit de Distribución Hyundai Tucson",
+            descripcion: "Kit completo de distribución para Hyundai Tucson",
+            precio: "₡125,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    mazda: [
+        {
+            nombre: "Kit de Clutch Mazda 3",
+            descripcion: "Kit completo de clutch para Mazda 3",
+            precio: "₡115,000",
+            imagen: "https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Amortiguadores Mazda CX-5",
+            descripcion: "Sistema de suspensión premium para Mazda CX-5",
+            precio: "₡135,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    bmw: [
+        {
+            nombre: "Pastillas de Freno BMW Serie 3",
+            descripcion: "Pastillas de freno originales para BMW Serie 3 (E90, F30, G20)",
+            precio: "₡45,000",
+            imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Filtro de Aceite BMW Serie 5",
+            descripcion: "Filtro de aceite premium para BMW Serie 5",
+            precio: "₡25,000",
+            imagen: "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Amortiguadores BMW X3",
+            descripcion: "Sistema de suspensión deportiva para BMW X3",
+            precio: "₡155,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    "mercedes-benz": [
+        {
+            nombre: "Kit de Distribución Mercedes C-Class",
+            descripcion: "Kit completo de distribución para Mercedes C-Class",
+            precio: "₡185,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Bomba de Combustible Mercedes E-Class",
+            descripcion: "Bomba de combustible eléctrica para Mercedes E-Class",
+            precio: "₡95,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    volkswagen: [
+        {
+            nombre: "Kit de Frenos Volkswagen Jetta",
+            descripcion: "Sistema completo de frenos para Volkswagen Jetta",
+            precio: "₡75,000",
+            imagen: "https://images.unsplash.com/photo-1625047509248-ec889cbff17f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Alternador Volkswagen Golf",
+            descripcion: "Alternador de alta eficiencia para Volkswagen Golf",
+            precio: "₡85,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    ford: [
+        {
+            nombre: "Motor de Arranque Ford Focus",
+            descripcion: "Motor de arranque para Ford Focus y Fiesta",
+            precio: "₡65,000",
+            imagen: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Kit de Clutch Ford Escape",
+            descripcion: "Kit completo de clutch para Ford Escape",
+            precio: "₡115,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ],
+    chevrolet: [
+        {
+            nombre: "Radiador Chevrolet Aveo",
+            descripcion: "Radiador de aluminio para Chevrolet Aveo",
+            precio: "₡55,000",
+            imagen: "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        },
+        {
+            nombre: "Amortiguadores Chevrolet Cruze",
+            descripcion: "Sistema de suspensión para Chevrolet Cruze",
+            precio: "₡85,000",
+            imagen: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+        }
+    ]
+};
+
+/* ===== PRODUCTOS DE EJEMPLO ANTERIORES (mantenidos para compatibilidad) ===== */
 const productosChinos = [
     {
         nombre: "Kit de Frenos BYD",
@@ -83,13 +345,25 @@ const productosEuropeos = [
 
 /* ===== MARCAS POR TIPO DE CARRO ===== */
 const marcasChinas = [
-    "BYD", "Chery", "JAC", "Great Wall", "Geely", "MG", "Dongfeng", "Foton", "Lifan", "Changan"
+    { nombre: "BYD", logo: "img/BYD.png", info: "Líder en vehículos eléctricos" },
+    { nombre: "Chery", logo: "img/CHERY.png", info: "Calidad y eficiencia" },
+    { nombre: "JAC", logo: "img/JAC.png", info: "Innovación automotriz" },
+    { nombre: "Great Wall", logo: "img/GREATWALL.png", info: "SUVs y pickups resistentes" },
+    { nombre: "Geely", logo: "img/GEELY.png", info: "Tecnología avanzada" },
+    { nombre: "MG", logo: "img/MG.png", info: "Deportividad y estilo" }
 ];
 
-const marcasEuropeas = [
-    "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Toyota", "Honda", "Nissan", "Hyundai", 
-    "Mazda", "Kia", "Peugeot", "Renault", "Volvo", "SEAT", "Skoda", "Opel", "Ford", 
-    "Chevrolet", "Mitsubishi", "Subaru", "Suzuki", "Infiniti", "Lexus", "Acura"
+const marcasParticulares = [
+    { nombre: "Toyota", logo: "img/Toyota.png", info: "Calidad que perdura" },
+    { nombre: "Honda", logo: "img/Honda.png", info: "Potencia de los sueños" },
+    { nombre: "Nissan", logo: "img/Nissan.png", info: "Innovación que emociona" },
+    { nombre: "Hyundai", logo: "img/Hyundai.png", info: "Nuevas posibilidades" },
+    { nombre: "Mazda", logo: "img/Mazda.png", info: "Zoom-Zoom" },
+    { nombre: "BMW", logo: "img/BMW.png", info: "El placer de conducir" },
+    { nombre: "Mercedes-Benz", logo: "img/mercedes.png", info: "Lo mejor o nada" },
+    { nombre: "Volkswagen", logo: "img/Volkswagen.png", info: "Das Auto" },
+    { nombre: "Ford", logo: "img/Ford.png", info: "Go Further" },
+    { nombre: "Chevrolet", logo: "img/Chevrolet.png", info: "Find New Roads" }
 ];
 
 /* ===== IMÁGENES DE GALERÍA ===== */
@@ -165,7 +439,28 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFAQ();
     initializeScrollAnimations();
     initializeHeader();
+    initializeKeyboardEvents();
 });
+
+/* ===== EVENTOS DE TECLADO ===== */
+function initializeKeyboardEvents() {
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            // Cerrar modales con tecla Escape
+            const brandModal = document.getElementById('brand-modal');
+            const galleryModal = document.getElementById('modal-gallery');
+            const successModal = document.getElementById('success-modal');
+            
+            if (brandModal && brandModal.style.display === 'flex') {
+                hideBrandModal();
+            } else if (galleryModal && galleryModal.style.display === 'flex') {
+                closeModal();
+            } else if (successModal && successModal.style.display === 'flex') {
+                closeSuccessModal();
+            }
+        }
+    });
+}
 
 /* ===== NAVEGACIÓN ===== */
 function initializeNavigation() {
@@ -223,22 +518,241 @@ function initializeCarSelection() {
 }
 
 function showProducts(tipo) {
+    console.log('Mostrando productos para tipo:', tipo); // Debug
+    currentCarType = tipo;
+    showBrandModal();
+}
+
+function showBrandModal() {
+    console.log('showBrandModal - currentCarType:', currentCarType); // Debug
+    
+    // Si no hay tipo de carro definido, no podemos mostrar el modal
+    if (!currentCarType) {
+        console.error('Tipo de carro no definido');
+        alert('Error: Tipo de vehículo no seleccionado. Por favor, selecciona primero el tipo de vehículo.');
+        return;
+    }
+    
+    // CERRAR TODOS LOS MODALES PRIMERO
+    const productsModal = document.getElementById('products-modal');
+    if (productsModal) {
+        productsModal.style.display = 'none';
+    }
+    
+    const brandModal = document.getElementById('brand-modal');
+    const brandModalTitle = document.getElementById('brand-modal-title');
+    const brandsGrid = document.getElementById('brands-grid');
+    
+    if (!brandModal || !brandModalTitle || !brandsGrid) return;
+    
+    const marcas = currentCarType === 'chino' ? marcasChinas : marcasParticulares;
+    const titulo = currentCarType === 'chino' ? 'Selecciona una Marca China' : 'Selecciona una Marca';
+    const cardClass = currentCarType === 'chino' ? 'chinese' : 'european';
+    
+    brandModalTitle.textContent = titulo;
+    brandsGrid.innerHTML = '';
+    
+    marcas.forEach(marca => {
+        const brandCard = document.createElement('div');
+        brandCard.className = `brand-card ${cardClass}`;
+        brandCard.onclick = () => showProductsByBrandModal(marca.nombre);
+        
+        brandCard.innerHTML = `
+            <div class="brand-logo">
+                <img src="${marca.logo}" alt="${marca.nombre}" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div style="display: none; font-size: 2rem;">${marca.nombre.charAt(0)}</div>
+            </div>
+            <div class="brand-name">${marca.nombre}</div>
+            <div class="brand-info">${marca.info}</div>
+        `;
+        
+        // Agregar animación de entrada
+        brandCard.style.opacity = '0';
+        brandCard.style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            brandCard.style.transition = 'all 0.3s ease';
+            brandCard.style.opacity = '1';
+            brandCard.style.transform = 'scale(1)';
+        }, Math.random() * 200);
+        
+        brandsGrid.appendChild(brandCard);
+    });
+    
+    brandModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    
+    console.log('Modal de marcas abierto');
+}
+
+function hideBrandModal() {
+    const brandModal = document.getElementById('brand-modal');
+    if (brandModal) {
+        brandModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function showProductsByBrandModal(marcaNombre) {
+    // Asegurar que el modal de marcas esté cerrado
+    hideBrandModal();
+    
+    const productsModal = document.getElementById('products-modal');
+    const productsModalGrid = document.getElementById('products-modal-grid');
+    const productsModalTitle = document.getElementById('products-modal-title');
+    
+    if (!productsModal || !productsModalGrid || !productsModalTitle) return;
+    
+    const marcaKey = marcaNombre.toLowerCase().replace('-', '');
+    const productos = productosPorMarca[marcaKey] || [];
+    
+    productsModalTitle.textContent = `Productos para ${marcaNombre}`;
+    productsModalGrid.innerHTML = '';
+    
+    if (productos.length === 0) {
+        // Si no hay productos específicos para esa marca, mostrar mensaje
+        productsModalGrid.innerHTML = `
+            <div class="no-products-message">
+                <i class="fas fa-search"></i>
+                <h3>Productos en consulta</h3>
+                <p>Estamos actualizando nuestro inventario para ${marcaNombre}.</p>
+                <p>Contáctanos para consultar disponibilidad de piezas específicas.</p>
+                <a href="https://wa.me/50622223333?text=Hola,%20necesito%20información%20sobre%20piezas%20para%20${marcaNombre}" target="_blank" class="btn btn-contact btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                </a>
+                <a href="contacto.html" class="btn btn-contact">
+                    <i class="fas fa-phone"></i> Contactar
+                </a>
+            </div>
+        `;
+    } else {
+        productos.forEach(producto => {
+            const productCard = createProductModalCard(producto, marcaNombre);
+            productsModalGrid.appendChild(productCard);
+        });
+    }
+    
+    productsModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function goBackToBrands() {
+    console.log('goBackToBrands - currentCarType:', currentCarType); // Debug
+    
+    // Función específica para el botón "Cambiar Marca"
+    // PASO 1: Cerrar TODOS los modales primero
+    closeAllModals();
+    
+    // PASO 2: Verificar que tenemos el tipo de carro
+    if (!currentCarType) {
+        console.error('currentCarType no está definido, volviendo a selección inicial');
+        return;
+    }
+    
+    // PASO 3: Abrir modal de marcas después de una pausa
+    setTimeout(() => {
+        console.log('Abriendo modal de marcas...');
+        showBrandModal();
+    }, 200);
+}
+
+function createProductModalCard(producto, marca) {
+    const card = document.createElement('div');
+    card.className = 'product-modal-card';
+    
+    const whatsappMessage = encodeURIComponent(`Hola, me interesa el ${producto.nombre} para ${marca}. ¿Podrían darme más información sobre disponibilidad y precio?`);
+    
+    card.innerHTML = `
+        <div class="product-modal-image" style="background-image: url('${producto.imagen}')"></div>
+        <div class="product-modal-info">
+            <h4>${producto.nombre}</h4>
+            <p>${producto.descripcion}</p>
+            <div class="product-modal-price">${producto.precio}</div>
+            <div class="product-modal-actions">
+                <a href="https://wa.me/50622223333?text=${whatsappMessage}" target="_blank" class="btn-contact btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="contacto.html" class="btn-contact">
+                    <i class="fas fa-phone"></i> Contactar
+                </a>
+            </div>
+        </div>
+    `;
+    
+    // Agregar animación de entrada
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    
+    setTimeout(() => {
+        card.style.transition = 'all 0.5s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    }, Math.random() * 300);
+    
+    return card;
+}
+
+function hideProductsModal() {
+    const productsModal = document.getElementById('products-modal');
+    if (productsModal) {
+        productsModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        console.log('Modal de productos cerrado');
+    }
+}
+
+function closeAllModals() {
+    // Función de utilidad para cerrar todos los modales
+    const modals = ['products-modal', 'brand-modal', 'modal-gallery', 'success-modal'];
+    
+    modals.forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    document.body.style.overflow = 'auto';
+    console.log('Todos los modales cerrados');
+}
+
+function showProductsByBrand(marcaNombre) {
+    hideBrandModal();
+    
     const productsSection = document.getElementById('products-section');
     const productsGrid = document.getElementById('products-grid');
     const productsTitle = document.getElementById('products-title');
     
     if (!productsSection || !productsGrid || !productsTitle) return;
     
-    const productos = tipo === 'chino' ? productosChinos : productosEuropeos;
-    const titulo = tipo === 'chino' ? 'Productos para Carros Chinos' : 'Productos para Carros Particulares';
+    const marcaKey = marcaNombre.toLowerCase().replace('-', '');
+    const productos = productosPorMarca[marcaKey] || [];
     
-    productsTitle.textContent = titulo;
-    productsGrid.innerHTML = '';
-    
-    productos.forEach(producto => {
-        const productCard = createProductCard(producto);
-        productsGrid.appendChild(productCard);
-    });
+    if (productos.length === 0) {
+        // Si no hay productos específicos para esa marca, mostrar mensaje
+        productsTitle.textContent = `Productos para ${marcaNombre}`;
+        productsGrid.innerHTML = `
+            <div class="no-products-message">
+                <div style="text-align: center; padding: 60px 20px; color: #7f8c8d;">
+                    <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px; color: #bdc3c7;"></i>
+                    <h3 style="margin-bottom: 15px; color: #2c3e50;">Productos en consulta</h3>
+                    <p style="margin-bottom: 25px;">Estamos actualizando nuestro inventario para ${marcaNombre}.</p>
+                    <p style="margin-bottom: 25px;">Contáctanos para consultar disponibilidad de piezas específicas.</p>
+                    <a href="contacto.html" class="btn btn-primary">
+                        <i class="fas fa-phone"></i> Contactar
+                    </a>
+                </div>
+            </div>
+        `;
+    } else {
+        productsTitle.textContent = `Productos para ${marcaNombre}`;
+        productsGrid.innerHTML = '';
+        
+        productos.forEach(producto => {
+            const productCard = createProductCard(producto);
+            productsGrid.appendChild(productCard);
+        });
+    }
     
     productsSection.style.display = 'block';
     productsSection.scrollIntoView({ behavior: 'smooth' });
@@ -326,14 +840,14 @@ function initializeContactForm() {
 }
 
 function populateMarcas(tipo, selectElement) {
-    const marcas = tipo === 'chino' ? marcasChinas : marcasEuropeas;
+    const marcas = tipo === 'chino' ? marcasChinas : marcasParticulares;
     
     selectElement.innerHTML = '<option value="">Selecciona una marca</option>';
     
     marcas.forEach(marca => {
         const option = document.createElement('option');
-        option.value = marca.toLowerCase();
-        option.textContent = marca;
+        option.value = marca.nombre.toLowerCase();
+        option.textContent = marca.nombre;
         selectElement.appendChild(option);
     });
 }
@@ -524,6 +1038,8 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
     const modal = document.getElementById('modal-gallery');
     const successModal = document.getElementById('success-modal');
+    const brandModal = document.getElementById('brand-modal');
+    const productsModal = document.getElementById('products-modal');
     
     if (e.target === modal) {
         closeModal();
@@ -531,6 +1047,34 @@ document.addEventListener('click', function(e) {
     
     if (e.target === successModal) {
         closeSuccessModal();
+    }
+    
+    if (e.target === brandModal) {
+        hideBrandModal();
+    }
+    
+    if (e.target === productsModal) {
+        hideProductsModal();
+    }
+});
+
+// Cerrar modales con la tecla Escape
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        const brandModal = document.getElementById('brand-modal');
+        const productsModal = document.getElementById('products-modal');
+        const galleryModal = document.getElementById('modal-gallery');
+        const successModal = document.getElementById('success-modal');
+        
+        if (brandModal && brandModal.style.display === 'flex') {
+            hideBrandModal();
+        } else if (productsModal && productsModal.style.display === 'flex') {
+            hideProductsModal();
+        } else if (galleryModal && galleryModal.style.display === 'flex') {
+            closeModal();
+        } else if (successModal && successModal.style.display === 'flex') {
+            closeSuccessModal();
+        }
     }
 });
 
@@ -728,6 +1272,13 @@ logPerformance();
 // Estas funciones deben estar disponibles globalmente para los onclick en HTML
 window.showProducts = showProducts;
 window.hideProducts = hideProducts;
+window.showBrandModal = showBrandModal;
+window.hideBrandModal = hideBrandModal;
+window.showProductsByBrand = showProductsByBrand;
+window.showProductsByBrandModal = showProductsByBrandModal;
+window.hideProductsModal = hideProductsModal;
+window.closeAllModals = closeAllModals;
+window.goBackToBrands = goBackToBrands;
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.nextImage = nextImage;
